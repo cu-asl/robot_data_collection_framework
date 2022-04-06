@@ -1,0 +1,16 @@
+controller_joint_names: [shoulder_pan_joint,
+                        shoulder_lift_joint,
+                        elbow_joint,
+                        wrist_1_joint,
+                        wrist_2_joint,
+                        wrist_3_joint,
+                        H1_F1J1,
+                        H1_F1J2,
+                        H1_F1J3,
+                        H2_F1J1,
+                        H2_F1J2,
+                        H2_F1J3,
+                        H3_F1J1,
+                        H3_F1J2,
+                        H3_F1J3
+                        ]
