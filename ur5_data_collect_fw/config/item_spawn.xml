@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <models>
+        <!-- <model id ="cylinder" type="cylinder" color="red" amount="3" mass="0.1"
+                    radius="0.038" length="0.1" mu1="2.0" mu2="2.0" />  -->
+        <!-- <model id ="box" type="box" color="blue" amount="1"  mass="0.1" 
+                    box_size="0.05 0.05 0.1"/> -->
+        <model id="box_sq" filename="/urdf/box_sq.urdf" mass="10000"
+                    xyz="0.0869 0.109 0.85"/>
+    </models>
+</root>
+
+
+
+
