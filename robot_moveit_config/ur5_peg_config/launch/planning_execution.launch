@@ -1,21 +1,17 @@
 <?xml version="1.0"?>
 <launch>
-    <!-- <rosparam command="load" file="$(dirname)/../config/joint_names.yaml"/> -->
+    <arg name="moveit_rviz" default="true"/>
     <include file="$(dirname)/planning_context.launch" >
         <arg name="load_robot_description" value="true"/>
     </include>
 
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
-        <param name="/use_gui" value="false"/>
-        <rosparam param="/source_list">[/joint_states]</rosparam>
-    </node>
-
     <include file="$(dirname)/move_group.launch">
         <arg name="publish_monitored_planning_scene" value="true"/>
     </include>
-
-    <include file="$(dirname)/moveit_rviz.launch">
-        <arg name="rviz_config" value="$(dirname)/moveit.rviz"/>
-    </include>
-
+    
+    <group if="$(arg moveit_rviz)">
+        <include file="$(dirname)/moveit_rviz.launch">
+            <arg name="rviz_config" value="$(dirname)/moveit.rviz"/>
+        </include>
+    </group>
 </launch>

@@ -2,6 +2,7 @@
 <launch>
     <!-- Configuration -->
     <arg name="rviz" default="true"/>
+    <arg name="moveit_rviz" default="true"/>
     <arg name="debug" default="false"/>
     <arg if="$(arg debug)" name="launch-prefix" value="screen -d -m gdb -command=$(env HOME)/.ros/my_debug_log --ex run --args"/>
     <arg unless="$(arg debug)" name="launch-prefix" value=""/>
@@ -9,12 +10,22 @@
     <arg name="paused" default="false" doc="Starts gazebo in paused mode"/>
     <arg name="gui" default="true" doc="Starts gazebo gui"/>
     <arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
-
+    <arg name="compliance_controller" default="false" />
+    <arg name="control_peg" default="false" />
+    <arg name="control_peg_compliance" default="false" />
+    <arg name="spawn_open" default="" />
+    <arg name="spawn_save" default="" />
+    <arg unless="$(eval spawn_open == '')" name="arg_open" value="-open $(find ur5_data_collect_fw)/$(arg spawn_open)"/>
+    <arg     if="$(eval spawn_open == '')" name="arg_open" value=""/>
+    <arg unless="$(eval spawn_save == '')" name="arg_path" value="-fix_path $(find ur5_data_collect_fw)/$(arg spawn_save)"/>
+    <arg     if="$(eval spawn_save == '')" name="arg_path" value=""/>
+    
+    
     <!-- startup GAZEBO simulated world -->
-    <include file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <include file="$(find ur5_data_collect_fw)/launch/empty_world_remap.launch" >
         <arg name="world_name" value="$(find ur5_data_collect_fw)/worlds/empty_kinect.world"/>
         <arg name="paused" value="$(arg paused)"/>
-        <arg name="gui" value="$(arg gui)"/>    
+        <arg name="gui" value="$(arg gui)"/>
     </include>
 
     <!-- Load robot_description to parameter server -->
@@ -23,7 +34,7 @@ transmission_hw_interface:=$(arg transmission_hw_interface)"/>
 
     <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot 
 -J shoulder_lift_joint -1.5708 -J elbow_joint 1.5708 -J wrist_1_joint -1.5708 -J wrist_2_joint -1.5708" respawn="false" output="screen"/>
-    
+
     <!-- Load hardware configuration -->
     <rosparam file="$(find ur5_data_collect_fw)/config/peg_hw_config.yaml" command="load"></rosparam>
     <rosparam file="$(find ur_gazebo)/controller/arm_controller_ur5.yaml" command="load"/>
@@ -41,22 +52,38 @@ transmission_hw_interface:=$(arg transmission_hw_interface)"/>
     <rosparam file="$(find ur5_data_collect_fw)/config/peg_cartesian_controllers.yaml" command="load"></rosparam>
 
     <!-- Spawn controllers -->
-    <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" args="--stopped arm_controller" />
-    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="my_cartesian_compliance_controller" />
-    
+    <group if="$(arg compliance_controller)">
+        <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" args="--stopped arm_controller" />
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" args="my_cartesian_compliance_controller my_motion_control_handle" />
+    </group>
+    <group unless="$(arg compliance_controller)">
+        <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" args="arm_controller" />
+        <node name="controller_spawner" pkg="controller_manager" type="spawner" args="--stopped my_cartesian_compliance_controller my_motion_control_handle" />
+    </group>
     <!-- Spawn joint controller for testing my_joint_to_cartesian_controller  -->
     <!-- Note: This controller should be loaded and started -->
     <group ns="my_joint_to_cartesian_controller" >
             <node name="controller_spawner" pkg="controller_manager" type="spawner" args="joint_trajectory_controller" />
     </group>
 
-    <include file="$(find ur5_peg_config)/launch/planning_execution.launch" />
+    <include file="$(find ur5_peg_config)/launch/planning_execution.launch" >
+        <arg name="moveit_rviz" value="$(arg moveit_rviz)" />
+    </include>
     <!-- Visualization -->
     <group if="$(arg rviz)">
             <arg name="my_rviz" value="-d $(find cartesian_controller_examples)/etc/examples.rviz" />
             <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="$(arg my_rviz)" output="screen" />
     </group>
 
-    <node pkg="ur5_data_collect_fw" type="spawn_model.py" name="spawn_model"/>
+    <node pkg="ur5_data_collect_fw" type="spawn_model.py" name="spawn_model" args="$(arg arg_open) $(arg arg_path)"/>
+    <node pkg="ur5_data_collect_fw" type="record.py" name="record" args="-video_rgb_topic camera/rgb/image_raw -video_type avi -joint_topic joint_states -bag_topic tf joint_states asl/contact_sensor camera/rgb/image_raw camera/depth/image_raw -pose_record True -contact_topic asl/contact_sensor -video_depth_topic camera/depth/image_raw" />
+    <node pkg="ur5_data_collect_fw" type="moveit_to_compliance_server.py" name="moveit_to_compliance_server"/>
+
+    <group if="$(arg control_peg)">
+        <node pkg="ur5_data_collect_fw" type="control_peg_in_hole.py" name="control_peg_in_hole"/>
+    </group>
+    <group if="$(arg control_peg_compliance)">
+        <node pkg="ur5_data_collect_fw" type="control_peg_in_hole_compliance.py" name="control_peg_in_hole_compliance"/>
+    </group>
     
 </launch>

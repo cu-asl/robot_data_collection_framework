@@ -8,10 +8,6 @@ controller_list:
       - wrist_1_joint
       - wrist_2_joint
       - wrist_3_joint
-  - name: fake_peg_controller
-    type: $(arg fake_execution_type)
-    joints:
-      []
 initial:  # Define initial robot poses per group
   - group: manipulator
     pose: zero

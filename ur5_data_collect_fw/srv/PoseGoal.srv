@@ -1,6 +1,0 @@
-geometry_msgs/Pose pose
-string planning_group
-string start_state
-string goal_state
----
-bool ok

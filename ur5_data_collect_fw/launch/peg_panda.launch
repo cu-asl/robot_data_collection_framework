@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Configuration -->
+    <arg name="rviz" default="true"/>
+    <arg name="moveit_rviz" default="true"/>
+    <arg name="debug" default="false"/>
+    <arg if="$(arg debug)" name="launch-prefix" value="screen -d -m gdb -command=$(env HOME)/.ros/my_debug_log --ex run --args"/>
+    <arg unless="$(arg debug)" name="launch-prefix" value=""/>
+    <arg name="limited" default="true" doc="If true, limits joint range [-PI, PI] on all joints."/>
+    <arg name="paused" default="false" doc="Starts gazebo in paused mode"/>
+    <arg name="gui" default="true" doc="Starts gazebo gui"/>
+    <arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+    <arg name="compliance_controller" default="false" />
+    <arg name="control_peg" default="false" />
+    <arg name="control_peg_compliance" default="false" />
+    <arg name="spawn_open" default="" />
+    <arg name="spawn_save" default="" />
+    <arg unless="$(eval spawn_open == '')" name="arg_open" value="-open $(find ur5_data_collect_fw)/$(arg spawn_open)"/>
+    <arg     if="$(eval spawn_open == '')" name="arg_open" value=""/>
+    <arg unless="$(eval spawn_save == '')" name="arg_path" value="-fix_path $(find ur5_data_collect_fw)/$(arg spawn_save)"/>
+    <arg     if="$(eval spawn_save == '')" name="arg_path" value=""/>
+    
+    
+    <!-- startup GAZEBO simulated world -->
+    <include file="$(find ur5_data_collect_fw)/launch/empty_world_remap.launch" >
+        <arg name="world_name" value="$(find ur5_data_collect_fw)/worlds/empty_kinect.world"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="gui" value="$(arg gui)"/>
+    </include>
+
+    <!-- Load robot_description to parameter server -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find ur5_data_collect_fw)/urdf/panda_peg.xacro'
+transmission_hw_interface:=$(arg transmission_hw_interface)"/>
+
+    <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot
+-J panda_joint4 -1.5708" respawn="false" output="screen"/>
+
+    <!-- Load hardware configuration -->
+    <rosparam file="$(find ur5_data_collect_fw)/config/panda_peg.yaml" command="load"></rosparam>
+
+    <!-- Robot state publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+            <param name="publish_frequency" type="double" value="50.0" />
+            <param name="tf_prefix" type="string" value="" />
+    </node>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" args="manipulator_controller" />
+   
+    <!-- Joint state publisher -->
+    <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" args="joint_state_controller" respawn="true" output="screen"/>
+
+    <include file="$(find panda_peg_config)/launch/planning_execution.launch" >
+        <arg name="moveit_rviz" value="$(arg moveit_rviz)" />
+    </include>
+
+    <node pkg="ur5_data_collect_fw" type="spawn_model.py" name="spawn_model" args="$(arg arg_open) $(arg arg_path)"/>
+    <node pkg="ur5_data_collect_fw" type="record.py" name="record" args="-video_rgb_topic camera/rgb/image_raw -joint_topic joint_states -bag_topic tf joint_states asl/contact_sensor camera/rgb/image_raw camera/depth/image_raw -pose_record True -contact_topic asl/contact_sensor -video_depth_topic camera/depth/image_raw"/>
+    
+    <group if="$(arg control_peg)">
+        <node pkg="ur5_data_collect_fw" type="control_peg_in_hole.py" name="control_peg_in_hole"/>
+    </group>
+    <group if="$(arg control_peg_compliance)">
+        <node pkg="ur5_data_collect_fw" type="control_peg_in_hole_compliance.py" name="control_peg_in_hole_compliance"/>
+    </group>
+    
+</launch>

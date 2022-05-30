@@ -5,11 +5,11 @@
                     radius="0.038" length="0.1" mu1="2.0" mu2="2.0" />  -->
         <!-- <model id ="box" type="box" color="blue" amount="1"  mass="0.1" 
                     box_size="0.05 0.05 0.1"/> -->
-        <model id="box_sq" filename="/urdf/box_sq.urdf" mass="10000"
-                    xyz="0.0869 0.109 0.85"/>
+        <!-- <model id="box_sq" filename="/urdf/box_sq.urdf" mass="10000"
+                    xyz="0.0869 0.109 0.85"/> -->
+        <!-- <model id="cubiod" filename="/urdf/cuboid_static.urdf" xyz="0.19 0.109 1" /> -->
+        <!-- <model id="cubiod" filename="/urdf/cuboid_static.urdf" xyz="1.475 0 1" /> -->
+        <model id="box_sq" type="urdf" xyz="-0.30541181912629284 0.6308617570427298 1.2000000000000002" filename="/urdf/box_sq.urdf" amount="1"/>
+        
     </models>
 </root>
-
-
-
-
