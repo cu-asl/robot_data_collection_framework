@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<root>
+   <models>
+      <model id="box_sq" type="urdf" xyz="0.33814530854502717 0.3084501636779705 1.2000000000000002" filename="/urdf/box_sq.urdf" amount="1" />
+   </models>
+</root>
