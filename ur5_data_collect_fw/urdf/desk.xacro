@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="desk">
+    
+    <xacro:property name="desk_height" value="0.80" />
+    <xacro:property name="plate_thick" value="0.06" />
+    <xacro:property name="plate_width" value="1.00" />
+    <xacro:property name="plate_length" value="1.60" />
+    <xacro:property name="legwid" value="0.05" />
+    <xacro:property name="leglen" value="${desk_height-plate_thick}" />
+    <xacro:macro name="default_inertial" params="mass">
+        <inertial>
+        <mass value="${mass}" />
+        <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        </inertial>
+    </xacro:macro>
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+    <xacro:macro name="leg" params="prefix x_axis y_axis">
+        <link name="${prefix}_leg">
+            <visual>
+                <geometry>
+                    <box size="${legwid} ${legwid} ${leglen}"/>
+                </geometry>
+                <origin xyz="0 0 ${-leglen/2}" rpy="0 0 0"/>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${legwid} ${legwid} ${leglen-0.01}"/>
+                </geometry>
+                <origin xyz="0 0 ${-leglen/2}" rpy="0 0 0"/>
+            </collision>
+            <xacro:default_inertial mass="1"/>
+        </link>
+
+        <joint name="base_to_${prefix}_leg" type="fixed">
+            <parent link="plate"/>
+            <child link="${prefix}_leg"/>
+            <origin xyz="${x_axis*(plate_width-legwid)/2} ${y_axis*(plate_length-legwid)/2} ${-plate_thick}" />
+        </joint>
+        <gazebo reference="${prefix}_leg">
+            <mu1>1.0</mu1>
+            <mu2>1.0</mu2>
+            <material>Gazebo/Wood</material>
+        </gazebo>
+        <!-- A bunch of stuff cut -->
+    </xacro:macro>
+    <xacro:leg prefix="right_front" x_axis="1" y_axis="-1" />
+    <xacro:leg prefix="left_front" x_axis="1" y_axis="1" /> 
+    <xacro:leg prefix="right_back" x_axis="-1" y_axis="-1" />
+    <xacro:leg prefix="left_back" x_axis="-1" y_axis="1" /> 
+
+    <link name="plate">
+        <visual>
+            <origin xyz="0.0 0.0 ${-plate_thick/2}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${plate_width} ${plate_length} ${plate_thick}"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 ${-plate_thick/2}" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="${plate_width} ${plate_length} ${plate_thick}"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial mass="5"/>
+    </link>
+    <gazebo reference="plate">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+    
+</robot>

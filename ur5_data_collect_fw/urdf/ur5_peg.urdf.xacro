@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur5_peg">
+  
+    <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+    <!-- common stuff -->
+    <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" />
+
+    <!-- ur5 -->
+    <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+
+    <!-- arm -->
+    <xacro:ur5_robot prefix="" joint_limited="false"
+        transmission_hw_interface="$(arg transmission_hw_interface)"
+    />
+
+    <link name="peg">
+        <visual>
+            <geometry>
+                <box size="0.03 0.03 0.1"/>
+                <!-- <cylinder radius="0.03" length="0.1"/> -->
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.03 0.03 0.1"/>
+                <!-- <cylinder radius="0.03" length="0.1"/> -->
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.05"/>
+        </collision>
+    </link>
+    
+    <joint name="peg_joint" type="fixed">
+        <parent link="ee_link"/>
+        <child link="peg"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 1.5708 0.0"/>
+        
+    </joint>
+    
+    <xacro:property name="pedestal_height" value="0.20" />
+    
+    <link name="world" />
+
+    <xacro:include filename="$(find ur5_data_collect_fw)/urdf/desk.xacro"/>
+
+    <xacro:macro name="gazebo_color" params="name color">
+        <gazebo reference="${name}">
+            <mu1>0.2</mu1>
+            <mu2>0.2</mu2>
+            <material>Gazebo/${color}</material>
+        </gazebo>
+    </xacro:macro>
+  
+    <joint name="world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="plate"/>
+        <origin xyz="0.0 0.0 ${desk_height}" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <joint name="pedestal_joint" type="fixed">
+        <parent link="plate"/>
+        <child link="pedestal"/>
+        <origin xyz="${-plate_width/2+0.1} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <link name="pedestal">
+        <xacro:default_inertial mass="10"/>
+        <visual>
+            <origin xyz="0 0 ${pedestal_height/2}" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.1" length="${pedestal_height}"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0.5 0.5 0.5 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${pedestal_height/2}" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.1" length="${pedestal_height-0.01}"/>
+            </geometry>
+        </collision>
+    </link>
+    <gazebo reference="pedestal">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="pedestal"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 ${pedestal_height}" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <xacro:gazebo_color name="base_link" color="Turquoise"/> 
+    <xacro:gazebo_color name="shoulder_link" color="Turquoise"/> 
+    <xacro:gazebo_color name="upper_arm_link" color="Turquoise"/> 
+    <xacro:gazebo_color name="forearm_link" color="Turquoise"/> 
+    <xacro:gazebo_color name="wrist_1_link" color="Turquoise"/> 
+    <xacro:gazebo_color name="wrist_2_link" color="Turquoise"/> 
+    <xacro:gazebo_color name="wrist_3_link" color="Turquoise"/> 
+
+    <gazebo reference="peg">
+        <sensor name="peg_contact_sensor" type="contact">
+            <always_on>true</always_on>
+            <update_rate>100</update_rate>
+            <contact>
+                <collision>wrist_3_link_fixed_joint_lump__peg_collision_2</collision>
+            </contact>
+            <plugin name="contact_sensor_plugin" filename="libgazebo_ros_bumper.so">
+                <bumperTopicName>asl/contact_sensor</bumperTopicName>
+                <frameName>peg</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+</robot>

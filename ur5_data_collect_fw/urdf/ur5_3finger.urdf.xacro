@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur5_3finger">
+  
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" />
+
+  <!-- ur5 -->
+  <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+
+  <!-- arm -->
+  <xacro:ur5_robot prefix="" joint_limited="false"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+  />
+
+  <xacro:include filename="$(find ur5_data_collect_fw)/urdf/3finger.urdf"/>
+  
+  <xacro:property name="pedestal_height" value="0.20" />
+  
+  <link name="world" />
+
+  <xacro:include filename="$(find ur5_data_collect_fw)/urdf/desk.xacro"/>
+
+  <xacro:macro name="gazebo_color" params="name color">
+      <gazebo reference="${name}">
+          <mu1>0.2</mu1>
+          <mu2>0.2</mu2>
+          <material>Gazebo/${color}</material>
+      </gazebo>
+  </xacro:macro>
+  
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="plate"/>
+    <origin xyz="0.0 0.0 ${desk_height}" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <joint name="pedestal_joint" type="fixed">
+    <parent link="plate"/>
+    <child link="pedestal"/>
+    <origin xyz="${-plate_width/2+0.1} 0.0 0.0" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="pedestal">
+    <xacro:default_inertial mass="10"/>
+    <visual>
+      <origin xyz="0 0 ${pedestal_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1" length="${pedestal_height}"/>
+      </geometry>
+      <material name="Gray">
+        <color rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${pedestal_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1" length="${pedestal_height-0.01}"/>
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="pedestal">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="pedestal"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 ${pedestal_height}" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="bin">
+    <xacro:default_inertial mass="3"/>
+    <visual>
+      <geometry>
+        <mesh filename="package://ur5_data_collect_fw/meshes/bin.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0 0.8 0 1.000"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://ur5_data_collect_fw/meshes/bin.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <xacro:gazebo_color name="bin" color="Red"/> 
+  <xacro:gazebo_color name="base_link" color="Turquoise"/> 
+  <xacro:gazebo_color name="shoulder_link" color="Turquoise"/> 
+  <xacro:gazebo_color name="upper_arm_link" color="Turquoise"/> 
+  <xacro:gazebo_color name="forearm_link" color="Turquoise"/> 
+  <xacro:gazebo_color name="wrist_1_link" color="Turquoise"/> 
+  <xacro:gazebo_color name="wrist_2_link" color="Turquoise"/> 
+  <xacro:gazebo_color name="wrist_3_link" color="Turquoise"/> 
+
+  <joint name="bin_joint" type="fixed">
+    <parent link="world"/>
+    <child link="bin"/>
+    <origin xyz="-1.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>    
+  </joint>
+
+  <gazebo>
+    <plugin name="gazebo_grasp_fix" filename="libgazebo_grasp_fix.so">
+        <arm>
+          <arm_name>manipulator</arm_name>
+          <palm_link>wrist_3_link</palm_link>
+          <gripper_link>H1_F1_base_link</gripper_link>
+          <gripper_link>H1_F1_link_1</gripper_link>
+          <gripper_link>H1_F1_link_2</gripper_link>
+          <gripper_link>H1_F1_tip</gripper_link>
+          <gripper_link>H1_F2_base_link</gripper_link>
+          <gripper_link>H1_F2_link_1</gripper_link>
+          <gripper_link>H1_F2_link_2</gripper_link>
+          <gripper_link>H1_F2_tip</gripper_link>
+          <gripper_link>H1_F3_base_link</gripper_link>
+          <gripper_link>H1_F3_link_1</gripper_link>
+          <gripper_link>H1_F3_link_2</gripper_link>
+          <gripper_link>H1_F3_tip</gripper_link>
+        </arm>
+      <forces_angle_tolerance>100</forces_angle_tolerance>
+      <update_rate>4</update_rate>
+      <grip_count_threshold>4</grip_count_threshold>
+      <max_grip_count>8</max_grip_count>
+      <release_tolerance>0.005</release_tolerance>
+      <disable_collisions_on_attach>false</disable_collisions_on_attach>
+      <contact_topic>__default_topic__</contact_topic>
+    </plugin>
+  </gazebo>
+  <gazebo reference="H1_F1_link_2">
+    <sensor name="contact_sensor" type="contact">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <contact>
+            <collision>H1_F1_link_2_fixed_joint_lump__H1_F1_tip_collision_1</collision>
+        </contact>
+        <plugin filename="libgazebo_ros_bumper.so" name="contact_sensor_plugin">
+            <bumperTopicName>asl/contact_sensor</bumperTopicName>
+            <frameName>H1_F1_link_2</frameName>
+        </plugin>
+    </sensor>
+  </gazebo>
+</robot>
