@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<root>
+   <models>
+      <model id="cylinder_0_0" type="cylinder" color="green" xyz="-0.14538329399301908 0.37153195134923755 1.2000000000000002" amount="1" mass="0.1" radius="0.040" length="0.1" mu1="2.0" mu2="2.0"/>
+      <model id="cylinder_0_1" type="cylinder" color="green" xyz="-0.26849879360125606 -0.39461244317627797 1.2000000000000002" amount="1" mass="0.1" radius="0.040" length="0.1" mu1="2.0" mu2="2.0"/>
+      <model id="cylinder_0_2" type="cylinder" color="green" xyz="0.07523093124213345 0.5476480228078113 1.2000000000000002" amount="1" mass="0.1" radius="0.040" length="0.1" mu1="2.0" mu2="2.0"/>
+   </models>
+</root>
