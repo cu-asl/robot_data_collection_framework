@@ -36,13 +36,23 @@ Following the ubuntu install of ROS Noetic: http://wiki.ros.org/noetic/Installat
 1. sudo apt install python3-pip
 2. pip3 install pandas psutil urdfpy
 ## Demo
-### Execute the following Commands
+### Peg in Hole
+#### Execute the following Commands
 1. roscd ur5_data_collect_fw/scripts
 2. python3 run_loop.py -task 1 -open config/world_random_peg/1 -timeout 60 -num_open 3
-### Result while running
+#### Result while running
 Gazebo will be openned and the simulation of peg inserting to a hole will run
 ![Screenshot from 2022-06-01 20-59-41](https://user-images.githubusercontent.com/91130166/171422712-e7116999-9dfd-48e1-9d78-c3cf910fbe8c.png)
-### Result after the program is finished
+#### Result after the program is finished
 35 files should be created in the newest folder (highest number) in ur5_data_collect_fw/rec
 ![Screenshot from 2022-06-01 21-03-34](https://user-images.githubusercontent.com/91130166/171423484-9c31adcb-4b58-4b31-8f70-6868c939c364.png)
-
+### Pick and Place
+#### Execute the following Commands
+1. roscd ur5_data_collect_fw/scripts
+2. python3 run_loop.py -task 3 -open config/world_random_pick/1 -timeout 240 -num_open 3
+#### Result while running
+Gazebo will be openned and the simulation of picking and placing objects will run
+![Screenshot from 2022-06-01 21-10-32](https://user-images.githubusercontent.com/91130166/171431801-007b54e9-9043-45d9-9fc1-2625ae0fd677.png)
+#### Result after the program is finished
+34 files should be created in the newest folder (highest number) in ur5_data_collect_fw/rec
+![Screenshot from 2022-06-01 21-41-48](https://user-images.githubusercontent.com/91130166/171431925-7b77493a-c0a7-44a2-9769-facc4d01eb4a.png)
