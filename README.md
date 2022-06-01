@@ -46,7 +46,26 @@ sudo apt install python3-pip -y
 pip3 install pandas psutil urdfpy
 ```
 ## Demo
-### Peg in Hole
+Use run_loop.py with the following arguments
+#### -task : selecting robot, robot's task and controller
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**1 (default)** - UR5 peg in hole with joint trajectory controller
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**2** - UR5 peg in hole with cartesian compliance controller
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**3** - UR5 pick and place with joint trakectory controller
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**4** - Panda peg in hole with joint trajectory controller
+
+#### -open : path (relative to ur5_data_collect_fw) to the location of xml file of items to spawn
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**default** - config/item_spawn.xml
+
+#### -num_open : number of xml files to open from folder in -open
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**default** - 0 (all config)
+
+#### -timeout : time to stop one loop in seconds
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**default** - 300
+
+### Ex.1 UR5 Peg in Hole with Joint Trajectory Controller
 #### Execute the following Commands
 ```
 roscd ur5_data_collect_fw/scripts
@@ -62,7 +81,7 @@ Gazebo will be opened and the simulation of peg inserting to a hole will run
 
 <img src="https://user-images.githubusercontent.com/91130166/171423484-9c31adcb-4b58-4b31-8f70-6868c939c364.png" width="600">
 
-### Pick and Place
+### Ex.2 UR5 Pick and Place with Joint Trajectory Controller
 #### Execute the following Commands
 ```
 roscd ur5_data_collect_fw/scripts
