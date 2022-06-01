@@ -30,6 +30,14 @@ This repository contains all file needed to run a framework to do data collectio
 ### Install python3 library
 1. sudo apt install python3-pip
 2. pip3 install pandas psutil urdfpy
-### Demo
+## Demo
+### Execute the following Commands
 1. roscd ur5_data_collect_fw/scripts
 2. python3 run_loop.py -task 1 -open config/world_random_peg/1 -timeout 60 -num_open 3
+### Result while running
+Gazebo will be openned and the simulation of peg inserting to a hole will run
+![Screenshot from 2022-06-01 20-59-41](https://user-images.githubusercontent.com/91130166/171422712-e7116999-9dfd-48e1-9d78-c3cf910fbe8c.png)
+### Result after the program is finished
+35 files should be created in the newest folder (highest number) in ur5_data_collect_fw/rec
+![Screenshot from 2022-06-01 21-03-34](https://user-images.githubusercontent.com/91130166/171423484-9c31adcb-4b58-4b31-8f70-6868c939c364.png)
+
