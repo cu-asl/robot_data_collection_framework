@@ -3,11 +3,16 @@ This repository contains all file needed to run a framework to do data collectio
 
 ## Installation
 ### Install ROS
-1. Install at least ros-base
-2. echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-3. source ~/.bashrc
-4. sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
-5. sudo rosdep init && rosdep update
+Following the ubuntu install of ROS Noetic: http://wiki.ros.org/noetic/Installation/Ubuntu
+1. sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+2. sudo apt install curl # if you haven't already installed curl
+3. curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+4. sudo apt update
+5. sudo apt install ros-noetic-ros-base
+6. echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+7. source ~/.bashrc
+8. sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+9. sudo rosdep init && rosdep update
 ### Install catkin tools
 1. wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
 2. sudo apt update
