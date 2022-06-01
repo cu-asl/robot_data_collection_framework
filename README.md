@@ -6,24 +6,24 @@ This repository contains all file needed to run a framework to do data collectio
 Following the ubuntu install of ROS Noetic: http://wiki.ros.org/noetic/Installation/Ubuntu
 ```
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt install curl # if you haven't already installed curl
+sudo apt install curl -y
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 sudo apt update
-sudo apt install ros-noetic-ros-base
+sudo apt install ros-noetic-ros-base -y
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
-sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential -y
 sudo rosdep init && rosdep update
 ```
 ### Install catkin tools
 ```
 wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
 sudo apt update
-sudo apt-get install python3-catkin-tools
+sudo apt-get install python3-catkin-tools -y
 ```
 ### Install this package and requirements
 ```
-sudo apt install ros-noetic-moveit ros-noetic-controller-interface ros-noetic-control-toolbox ros-noetic-eigen-conversions ros-noetic-gazebo-ros ros-noetic-controller-manager ros-noetic-tf-conversions ros-noetic-robot-state-publisher ros-noetic-rqt ros-noetic-rqt-controller-manager ros-noetic-rqt-publisher ros-noetic-rqt-image-view ros-noetic-rqt-graph ros-noetic-gazebo-plugins ros-noetic-gazebo-ros-control ros-noetic-gazebo-ros-pkgs ros-noetic-robot-mechanism-controllers ros-noetic-joint-state-publisher ros-noetic-joint-state-controller ros-noetic-transmission-interface ros-noetic-position-controllers ros-noetic-joint-trajectory-controller
+sudo apt install ros-noetic-moveit ros-noetic-controller-interface ros-noetic-control-toolbox ros-noetic-eigen-conversions ros-noetic-gazebo-ros ros-noetic-controller-manager ros-noetic-tf-conversions ros-noetic-robot-state-publisher ros-noetic-rqt ros-noetic-rqt-controller-manager ros-noetic-rqt-publisher ros-noetic-rqt-image-view ros-noetic-rqt-graph ros-noetic-gazebo-plugins ros-noetic-gazebo-ros-control ros-noetic-gazebo-ros-pkgs ros-noetic-robot-mechanism-controllers ros-noetic-joint-state-publisher ros-noetic-joint-state-controller ros-noetic-transmission-interface ros-noetic-position-controllers ros-noetic-joint-trajectory-controller -y
 mkdir -p ~/catkin_ws/src 
 Download and upzip this package to the folder in 2
 cd ~/catkin_ws/src
@@ -40,7 +40,7 @@ chmod +x *
 ```
 ### Install python3 library
 ```
-sudo apt install python3-pip
+sudo apt install python3-pip -y
 pip3 install pandas psutil urdfpy
 ```
 ## Demo
