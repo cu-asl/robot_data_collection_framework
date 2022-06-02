@@ -31,7 +31,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/palm_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/palm_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -40,7 +40,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/palm_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/palm_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -103,7 +103,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_palm_link.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_palm_link.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -124,7 +124,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_base_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_base_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -133,7 +133,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_base_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_base_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -149,7 +149,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_prox_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_prox_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -158,7 +158,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_prox_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_prox_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -174,7 +174,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_dist_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_dist_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -183,7 +183,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_dist_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_dist_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -256,7 +256,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/omd-d18-tip.dae"/>
+        <mesh filename="package://fh_desc/meshes/omd-d18-tip.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -265,7 +265,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/omd-d18-tip.dae"/>
+        <mesh filename="package://fh_desc/meshes/omd-d18-tip.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -291,7 +291,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_palm_link.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_palm_link.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -312,7 +312,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_base_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_base_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -321,7 +321,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_base_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_base_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -337,7 +337,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_prox_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_prox_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -346,7 +346,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_prox_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_prox_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -362,7 +362,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_dist_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_dist_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -371,7 +371,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_dist_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_dist_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -444,7 +444,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/omd-d18-tip.dae"/>
+        <mesh filename="package://fh_desc/meshes/omd-d18-tip.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -453,7 +453,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/omd-d18-tip.dae"/>
+        <mesh filename="package://fh_desc/meshes/omd-d18-tip.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -479,7 +479,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_palm_link.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_palm_link.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -500,7 +500,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_base_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_base_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -509,7 +509,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_base_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_base_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -525,7 +525,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_prox_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_prox_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -534,7 +534,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_prox_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_prox_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -550,7 +550,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_dist_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_dist_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -559,7 +559,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/finger_dist_link_simple.dae"/>
+        <mesh filename="package://fh_desc/meshes/v2/finger_dist_link_simple.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -632,7 +632,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/omd-d18-tip.dae"/>
+        <mesh filename="package://fh_desc/meshes/omd-d18-tip.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
@@ -641,7 +641,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://ur5_data_collect_fw/meshes/gripper/3finger/omd-d18-tip.dae"/>
+        <mesh filename="package://fh_desc/meshes/omd-d18-tip.dae"/>
       </geometry>
       <material name="light_grey">
         <color rgba="0.75 0.75 0.75 1.0"/>
