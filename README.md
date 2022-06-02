@@ -3,7 +3,7 @@ This repository contains all file needed to run a framework to do data collectio
 
 ## Installation
 ### Install ROS
-Following the ubuntu install of ROS Noetic: http://wiki.ros.org/noetic/Installation/Ubuntu
+Following the [ubuntu install of ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu)
 ```
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt install curl -y
@@ -26,13 +26,14 @@ sudo apt-get install python3-catkin-tools -y
 sudo apt install ros-noetic-moveit ros-noetic-controller-interface ros-noetic-control-toolbox ros-noetic-eigen-conversions ros-noetic-gazebo-ros ros-noetic-controller-manager ros-noetic-tf-conversions ros-noetic-robot-state-publisher ros-noetic-rqt ros-noetic-rqt-controller-manager ros-noetic-rqt-publisher ros-noetic-rqt-image-view ros-noetic-rqt-graph ros-noetic-gazebo-plugins ros-noetic-gazebo-ros-control ros-noetic-gazebo-ros-pkgs ros-noetic-robot-mechanism-controllers ros-noetic-joint-state-publisher ros-noetic-joint-state-controller ros-noetic-transmission-interface ros-noetic-position-controllers ros-noetic-joint-trajectory-controller ros-noetic-franka-description -y
 mkdir -p ~/catkin_ws/src 
 ```
-Download and upzip this package to ~/catkin_ws/src
+Download and upzip this package to ~/catkin_ws/src, then follow the commands below
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/ros-industrial/universal_robot.git 
 git clone https://github.com/fzi-forschungszentrum-informatik/cartesian_controllers.git
 git clone https://github.com/JenniferBuehler/gazebo-pkgs.git
 git clone https://github.com/JenniferBuehler/general-message-pkgs.git
+git clone https://github.com/shadow-robot/smart_grasping_sandbox.git
 cd ~/catkin_ws
 catkin build
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
