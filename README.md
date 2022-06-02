@@ -1,6 +1,14 @@
 # RobotDataCollectionFramework
 This repository contains all file needed to run a framework to do data collection using ROS and Gazebo
 
+## System Requirements
+Software | Version
+----------- | -------------
+OS | Ubuntu 20.04
+ROS | Noetic Ninjemys
+Python | 3.8.10
+Gazebo | 11.10.2
+
 ## Installation
 ### Install ROS
 Following the [ubuntu install of ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu)
@@ -26,7 +34,9 @@ sudo apt-get install python3-catkin-tools -y
 sudo apt install ros-noetic-moveit ros-noetic-controller-interface ros-noetic-control-toolbox ros-noetic-eigen-conversions ros-noetic-gazebo-ros ros-noetic-controller-manager ros-noetic-tf-conversions ros-noetic-robot-state-publisher ros-noetic-rqt ros-noetic-rqt-controller-manager ros-noetic-rqt-publisher ros-noetic-rqt-image-view ros-noetic-rqt-graph ros-noetic-gazebo-plugins ros-noetic-gazebo-ros-control ros-noetic-gazebo-ros-pkgs ros-noetic-robot-mechanism-controllers ros-noetic-joint-state-publisher ros-noetic-joint-state-controller ros-noetic-transmission-interface ros-noetic-position-controllers ros-noetic-joint-trajectory-controller ros-noetic-franka-description -y
 mkdir -p ~/catkin_ws/src 
 ```
-Download and upzip this package to ~/catkin_ws/src, then follow the commands below
+
+Download and upzip [this package](https://github.com/cu-asl/robot_data_collection_framework/archive/refs/heads/main.zip) to ~/catkin_ws/src, then follow the commands below
+
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/ros-industrial/universal_robot.git 
@@ -97,6 +107,9 @@ Gazebo will be opened and the simulation of picking and placing objects will run
 34 files should be created in the newest folder (highest number) in ur5_data_collect_fw/rec
 
 <img src="https://user-images.githubusercontent.com/91130166/171431925-7b77493a-c0a7-44a2-9769-facc4d01eb4a.png" width="600">
+
+### Expected Error
+There are 10% chance that output as video or snapshot might not be generated due to the error of the recording program
 
 ### If want to stop the program
 1. ``ctrl`` + ``z`` at the terminal running run_loop.py
