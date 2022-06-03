@@ -102,10 +102,10 @@ if __name__ == "__main__":
     try:
         parser = argparse.ArgumentParser()
         parser.add_argument("-open", default="config/item_spawn.xml", help="path to xml file or folder")
-        parser.add_argument("-num_open", default=0, type=lambda x: int(x))
+        parser.add_argument("-num_open", default=0, type=lambda x: int(x), help="number of file config in the -open folder to open")
         parser.add_argument("-save", help="path to save generated complete xml file")
-        parser.add_argument("-task",default="1")
-        parser.add_argument("-timeout",default=300, type=lambda x: float(x))
+        parser.add_argument("-task",default="1", help="task specification: 1 for peg with trajectory, 2 for peg with complaince, 3 for pick and place, 4 for panda peg")
+        parser.add_argument("-timeout",default=300, type=lambda x: float(x), help="time limit for doing the task in one round")
         args = parser.parse_args(rospy.myargv()[1:])
         main(args)
     except:
