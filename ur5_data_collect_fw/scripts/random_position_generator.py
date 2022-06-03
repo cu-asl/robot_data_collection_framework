@@ -9,7 +9,7 @@ class RandomPositionGenerator:
     def __init__(self):
         parser = argparse.ArgumentParser()
         parser.add_argument('filename',help="file input as format of config/item_spawn.xml")
-        parser.add_argument('num_output',help="file input as format of config/item_spawn.xml")
+        parser.add_argument('num_output',help="number of file output")
         parse = parser.parse_args(rospy.myargv()[1:]).filename
         filename = parser.parse_args(rospy.myargv()[1:]).filename
         num_output = parser.parse_args(rospy.myargv()[1:]).num_output
